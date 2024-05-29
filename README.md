@@ -1,8 +1,27 @@
 # nFAPI OAI 
 
 ## Build procedure:
+### For USRP support:
 
 ```shell
+sudo apt install -y autoconf automake build-essential ccache cmake cpufrequtils doxygen ethtool g++ git inetutils-tools libboost-all-dev libncurses5 libncurses5-dev libusb-1.0-0 libusb-1.0-0-dev libusb-dev python3-dev python3-mako python3-numpy python3-requests python3-scipy python3-setuptools python3-ruamel.yaml
+
+git clone https://github.com/EttusResearch/uhd.git ~/uhd
+cd ~/uhd
+git checkout v4.6.0.0
+cd host
+mkdir build
+cd build
+cmake ../
+make -j $(nproc)
+make test # This step is optional
+sudo make install
+sudo ldconfig
+sudo uhd_images_downloader
+```
+
+```shell
+./build_oai -I
 ./build_oai -w USRP --ninja --nrUE --gNB --build-lib "nrscope" -C
 ```
 
